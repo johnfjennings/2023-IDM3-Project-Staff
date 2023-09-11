@@ -4,11 +4,10 @@ Docker compose for glassfish based web application with mysql database and phpmy
 
 ## Instructions:
 
-1. Install Docker-desktop:  https://docs.docker.com/docker-for-windows/
-
-2. Place an SQL dump of your database in ./db/mysql.sql. This will be auto loaded at launch
-
-3. Place your app.war file in ./web/app.war. This will also be auto deployed on launch
+1. Clone this repo to your computer
+2. Install Docker-desktop:  https://docs.docker.com/docker-for-windows/
+3. Place an SQL dump of your database in ./db/mysql.sql. This will be auto loaded at launch
+4. Place your packaged app.war file in ./web/app.war. This will also be auto deployed on launch
 
 ## mysql
 
