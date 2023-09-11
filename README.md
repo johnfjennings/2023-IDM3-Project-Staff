@@ -14,16 +14,13 @@ Docker compose for glassfish based web application with mysql database and phpmy
 The following MySql connection details must be coded in your application
 
 * Username = site_user
-
 * Password = site_password
-
 * database hostname = db
-
 * database port = 3306
 
 ## Run
 
-The easiest way to interact with this deployment is to open this folder in CS Code and in a new terminal enter the following commands:
+The easiest way to interact with this deployment is to open this folder in VS Code and in a new terminal enter the following commands:
 
 1. docker-compose build   # this builds the container images based on the docker-compose.yaml configuration file
 2. docker-compose up -d  # this launches the set of containers
@@ -33,8 +30,6 @@ The easiest way to interact with this deployment is to open this folder in CS Co
 Access your web application at http://localhost:8880/app in browser. If you named your warfile differently then please change the url appropriately.
 
 Access phpmyadmin  http://localhost:8888/ in browser
-
-
 
 ## Container Management
 
