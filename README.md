@@ -1,46 +1,45 @@
 # IDM3 Sample docker setup
 
-Docker compose for glassfish based web application with mysql database and phpmyadmin. 
+Docker compose for glassfish based web application with mysql database and phpmyadmin.
 
 ## Instructions:
-Install Docker-desktop:  https://docs.docker.com/docker-for-windows/
 
-Place dump of database in ./db/mysql.sql to be auto loaded at launch
+1. Install Docker-desktop:  https://docs.docker.com/docker-for-windows/
 
-Place app.war file in ./web/app.war to be auto deployed on launch
+2. Place an SQL dump of your database in ./db/mysql.sql. This will be auto loaded at launch
+
+3. Place your app.war file in ./web/app.war. This will also be auto deployed on launch
 
 ## mysql
 
-Username:password = site_user:site_password
+The following MySql connection details must be coded in your application
 
-database hostname = db
+* Username = site_user
 
-database port = 3306
+* Password = site_password
 
+* database hostname = db
+
+* database port = 3306
 
 ## Run
 
-Build:
+The easiest way to interact with this deployment is to open this folder in CS Code and in a new terminal enter the following commands:
 
-docker-compose build
+1. docker-compose build   # this builds the container images based on the docker-compose.yaml configuration file
+2. docker-compose up -d  # this launches the set of containers
 
-Run:
+## View
 
-docker-compose up -d
-
-Access web application at http://localhost:8880/app in browser
+Access your web application at http://localhost:8880/app in browser. If you named your warfile differently then please change the url appropriately.
 
 Access phpmyadmin  http://localhost:8888/ in browser
 
-Stop:
-
-docker-compose stop db
-
-docker-compose rm -fv db
-
-docker-compose stop web
-
-docker-compose rm -fv web
 
 
+## Container Management
 
+* docker-compose stop db   # Stop the db container
+* docker-compose rm -fv db # Stop and remove the db container
+* docker-compose stop web  # Stop the web container
+* docker-compose rm -fv web # Stop and remove the web container
