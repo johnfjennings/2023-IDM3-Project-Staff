@@ -1,63 +1,46 @@
-version: '3.1'
+version: '3'
 # Define services
 services:
-
-  web:
-    # image : glassfish
-    image: tomcat:8.0-alpine
-    volumes:
-      #  - idm3vol-war:/glassfish4/glassfish/domains/domain1/autodeploy
-      - idm3vol-war:/usr/local/tomcat/webapps/
-    ports:
-      - "8080"
-    depends_on:
-      - db
-      - phpmyadmin
-    links:
-      - db
-      - phpmyadmin 
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-
-
   # Database Service (Mysql)
   db:
     container_name: db
     #latest mysql will not work, use only version 5.5
     image: mysql:5.5
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bookmap
-      MYSQL_USER: site_user
-      MYSQL_PASSWORD: site_password
+     MYSQL_ROOT_PASSWORD: root
+     MYSQL_DATABASE: bookmap
+     MYSQL_USER: site_user
+     MYSQL_PASSWORD: site_password
     ports:
-      - 3306
+     - 3316:3306
     volumes:
-      - idm3vol-db:/docker-entrypoint-initdb.d
-   
-
+    - "./db:/docker-entrypoint-initdb.d"
 
  # Database Management Service (phpMyAdmin)   
   phpmyadmin:
     depends_on:
-      - db
+     - db
     image: phpmyadmin/phpmyadmin
     ports:
-      - '80'
+     - '8888:80'
     environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root
+     PMA_HOST: db
+     MYSQL_ROOT_PASSWORD: root
 
-  
+  web:
+    build: ./web/
 
-volumes:
-  idm3vol-db:
-    driver: azure_file
-    driver_opts:
-      share_name: idm3share-db
-      storage_account_name: mystorageaccountidm32023
-  idm3vol-war:
-    driver: azure_file
-    driver_opts:
-      share_name: idm3share-war
-      storage_account_name: mystorageaccountidm32023
+    ports:
+      - "4848:4848"
+      - "8880:8080"
+      - "8181:8181"
+    depends_on:
+     - db
+     - phpmyadmin
+
+    links:
+      - db
+      - phpmyadmin
+    
+    environment:
+     MYSQL_ROOT_PASSWORD: root
