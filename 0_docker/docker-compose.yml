@@ -8,9 +8,9 @@ services:
     image: mysql:5.5
     environment:
      MYSQL_ROOT_PASSWORD: root
-     MYSQL_DATABASE: bookmap
-     MYSQL_USER: site_user
-     MYSQL_PASSWORD: site_password
+     MYSQL_DATABASE: idm3project2023
+     MYSQL_USER: root
+     MYSQL_PASSWORD: ""
     ports:
      - 3316:3306
     volumes:

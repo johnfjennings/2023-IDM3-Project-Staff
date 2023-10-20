@@ -8,7 +8,7 @@ import java.util.Properties;
 public class DatabaseHelper {
     public static Connection getConnection() {
 
-        String host = "localhost";
+        String host = "db";
         String dbName = "idm3project2023";
         int port = 3306;
         String mySqlUrl = "jdbc:mysql://" + host + ":" + port+ "/" + dbName;
