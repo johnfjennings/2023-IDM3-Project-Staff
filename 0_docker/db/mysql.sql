@@ -39,7 +39,8 @@ CREATE TABLE `project` (
                            `Category` varchar(50) NOT NULL,
                            `ProjectDescriptionSummary` varchar(100) NOT NULL,
                            `ProjectImage` varchar(200) NOT NULL,
-                           `CreationDate` date NOT NULL DEFAULT current_timestamp()
+                           `CreationDate` date NOT NULL DEFAULT '1999-12-12 12:12:12'cd ..
+                           
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
