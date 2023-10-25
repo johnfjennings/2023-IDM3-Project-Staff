@@ -90,10 +90,19 @@
     <div id="demo1" class="carousel slide" data-bs-ride="carousel">
 
         <!-- Indicators/dots -->
+
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+
+            <c:forEach varStatus="status" var="liveShowcase" items="${AllLiveShowcases}">
+                <c:if test="${status.first}"><button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button></c:if>
+
+                <c:if test="${!status.first}">
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="${status.index}"></button>
+                </c:if>
+            </c:forEach>
+
+        </div>
+
         </div>
         <!-- Carousel -->
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -101,23 +110,32 @@
             <!-- Indicators/dots -->
             <div class="col-lg-4 col-md-2 col-sm-12 mt-3">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                    <c:forEach varStatus="status" var="liveShowcase" items="${AllLiveShowcases}">
+                        <c:if test="${status.first}"><button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button></c:if>
+
+                        <c:if test="${!status.first}">
+                            <button type="button" data-bs-target="#demo" data-bs-slide-to="${status.index}"></button>
+                        </c:if>
+                    </c:forEach>
+
                 </div>
             </div>
 
             <!-- The slideshow/carousel -->
             <div class="carousel-inner">
-                <c:forEach var="liveShowcase" items="${AllLiveShowcases}">
-
+                <c:forEach var="liveShowcase" varStatus="status" items="${AllLiveShowcases}">
+                    <c:if test="${status.first}">
                     <div class="carousel-item active">
+                    </c:if>
+                        <c:if test="${!status.first}">
+                             <div class="carousel-item"></c:if>
                         <img src="resources/images/showcases/${liveShowcase.image}" alt="${liveShowcase.name}" class="d-block w-100">
                         <div class="carousel-caption">
                             <h1>${liveShowcase.name}</h1>
                             <a href="#" class="btn btn-primary">Browse the showcase</a>
                         </div>
                     </div>
+
 
                 </c:forEach>
             </div>
@@ -165,7 +183,8 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card" style="width:400px" style="length:400px">
-                        <img class="card-img-top" src="resources/images/projects/${project.projectImage}" alt="Card image">
+<%--                        <img class="card-img-top" src="resources/images/projects/${project.projectImage}" alt="Card image">--%>
+                            <img class="card-img-top" src="resources/images/projects/${project.projectImage}" alt="Card image">
                         <div class="card-body">
                             <h5 class="card-title">${project.projectName}</h5>
                             <p class="card-text">${project.projectDescriptionSummary}</p>

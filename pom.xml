@@ -10,8 +10,6 @@
     <name>IDM3ProjectBasic</name>
     <packaging>war</packaging>
 
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>11</maven.compiler.target>
@@ -52,6 +50,12 @@
         </dependency>
 
         <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>[0.4, 0.5)</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
@@ -66,12 +70,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
-
-
         </plugins>
     </build>
-
-
-
-
 </project>

@@ -3,12 +3,17 @@ package com.idm3projectbasic.controller;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.idm3projectbasic.model.Project;
 import com.idm3projectbasic.model.Showcase;
 import com.idm3projectbasic.model.User;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 @WebServlet(name = "MainGalleryController", value = "/MainGalleryController")
 public class MainGalleryController extends HttpServlet {
@@ -141,15 +146,55 @@ public class MainGalleryController extends HttpServlet {
     private void setUpIndexPageData(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         //find recent project for the index page
         Project projects = new Project();
-        ArrayList<Project> Gallery= new ArrayList<>();
-        Gallery = projects.findAllProjectsRecentFirst();
-        session.setAttribute("AllProjectsRecentFirst",Gallery);
+        ArrayList<Project> ProjectGallery= new ArrayList<>();
+
+
+        ProjectGallery = projects.findAllProjectsRecentFirst();
+        session.setAttribute("AllProjectsRecentFirst",ProjectGallery);
+        //generate thumbnails for project -
+        generateProjectGalleryThumbnail(ProjectGallery);
 
         //find live shoecases for the index page
         ArrayList<Showcase> ShowcaseGallery= new ArrayList<>();
         Showcase s = new Showcase();
         ShowcaseGallery = s.findAllLiveShowcases();
+        //generate thumbnails for showcases -
+        generateShowcaseThumbnail(ShowcaseGallery);
+
         session.setAttribute("AllLiveShowcases",ShowcaseGallery);
+
+    }
+
+    private void generateShowcaseThumbnail(ArrayList<Showcase> ShowcaseGallery) {
+        for (Showcase Showcase : ShowcaseGallery) {
+
+            File destinationDir = new File(getServletContext().getRealPath("") + "/resources/images/showcases/thumbnail");
+            System.out.println("file path for showcases thumbnails " + destinationDir.getAbsolutePath());
+            try {
+                Thumbnails.of(getServletContext().getRealPath("")+"/resources/images/showcases/" + Showcase.getImage())
+                        .forceSize(1000, 370)
+                        .toFiles(destinationDir, Rename.NO_CHANGE);
+            } catch (IOException e) {
+                System.out.println("Error on showcases thumbnail creation " + e);
+            }
+
+        }
+    }
+    private void generateProjectGalleryThumbnail(ArrayList<Project> projectGallery) {
+
+        for (Project project : projectGallery) {
+
+            File destinationDir = new File(getServletContext().getRealPath("") + "/resources/images/projects/thumbnail");
+            System.out.println("file path for thumbnails" + destinationDir.getAbsolutePath());
+            try {
+                Thumbnails.of(getServletContext().getRealPath("")+"/resources/images/projects/" + project.getProjectImage())
+                        .forceSize(200, 200)
+                        .toFiles(destinationDir, Rename.NO_CHANGE);
+            } catch (IOException e) {
+                System.out.println("Error on thumbnail creation " + e);
+            }
+
+        }
 
     }
 
