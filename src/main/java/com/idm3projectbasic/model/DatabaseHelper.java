@@ -15,7 +15,7 @@ public class DatabaseHelper {
 
         Properties userInfo = new Properties();
         userInfo.put("user", "root");
-        userInfo.put("password", "");
+        userInfo.put("password", "root");
 
         try {
             //  Class.forName("jdbc:mariadb://localhost:3306/bookshop");
