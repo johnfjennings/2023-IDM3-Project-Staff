@@ -19,8 +19,8 @@ public class DatabaseHelper {
 
         try {
             //  Class.forName("jdbc:mariadb://localhost:3306/bookshop");
-            //Class.forName("com.mysql.jdbc.Driver");
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
             mySqlUrl = "jdbc:mysql://" + host + ":" + port
                     + "/" + dbName;
