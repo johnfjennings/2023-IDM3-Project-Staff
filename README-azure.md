@@ -43,10 +43,15 @@ Install Azure CLI - https://learn.microsoft.com/en-us/cli/azure/install-azure-cl
   * az storage share create --name idm3share --account-name mystorageaccountidm32023
 
 Login to https://portal.azure.com/
+
 Goto Storage Accounts 
+
 Create idm3share-db folder
+
 Create idm3share-war folder
+
 upload mysql.sql to idm3share-db folder
+
 upload app.war to idm3share-war folder
 
 
@@ -62,4 +67,5 @@ upload app.war to idm3share-war folder
 Goto Azure Portal and find public IP address of container
 
 Goto http://<ipaddress>:80/ to access phpmyadmin
+
 Goto http://<ipaddress>:8080/app/ to access WebApplication 
