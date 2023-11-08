@@ -12,50 +12,35 @@ Install Azure CLI - https://learn.microsoft.com/en-us/cli/azure/install-azure-cl
 ## Commands 
 
 1. First you need to login to Azure and create an account if necessary
-* az login 
+  * az login 
 
-### Next create a resource group to contain all resources for this project 
+2. Next create a resource group to contain all resources for this project 
+  * az group create --name myResourceGroup --location northeurope 
 
-az group create --name myResourceGroup --location northeurope 
+3. Once you've created the resource group, create an Azure container registry with the az acr create command. The container registry name must be unique within Azure, and contain 5-50 alphanumeric characters:
+  * az acr create --resource-group myResourceGroup --name tusidm3 --sku Basic
 
+4. You might need to login again if you come back to this step
+  * az login
 
-### Once you've created the resource group, create an Azure container registry with the az acr create command. The container registry name must be unique within Azure, and contain 5-50 alphanumeric characters:
+5. You must log in to your Azure Container Registry instance before pushing images to it
+  * az acr login --name tusidm3
 
-az acr create --resource-group myResourceGroup --name tusidm3 --sku Basic
+6. To use Docker commands to run containers in Azure Container Instances, first log into Azure:
+  * docker login azure
 
+7. Create an ACI context by running docker context create aci. This context associates Docker with an Azure subscription and resource group so you can create and manage container instances. For example, to create a context called myacicontext:
+  * docker context create aci myacicontext
 
+8.  Next, change to the ACI context. Subsequent Docker commands run in this context.
+  * docker context use myacicontext
 
-### You might need to login again if you come back to this step
-az login
+9. Need to upload mysql.sql and app.war files to azure file share 
+  * https://learn.microsoft.com/en-us/azure/container-instances/container-instances-volume-azure-files
 
-### You must log in to your Azure Container Registry instance before pushing images to it
-az acr login --name tusidm3
-
-
-### To use Docker commands to run containers in Azure Container Instances, first log into Azure:
-
-docker login azure
-
-### Create an ACI context by running docker context create aci. This context associates Docker with an Azure subscription and resource group so you can create and manage container instances. For example, to create a context called myacicontext:
-
-docker context create aci myacicontext
-
-### Next, change to the ACI context. Subsequent Docker commands run in this context.
-docker context use myacicontext
-
-
-
-### Need to upload mysql.sql and app.war files to azure file share 
-
-https://learn.microsoft.com/en-us/azure/container-instances/container-instances-volume-azure-files
-
-
-
-### Create the storage account with the parameters & then create the file share
-az storage account create --resource-group myResourceGroup --name mystorageaccountidm32023 --location northeurope --sku Standard_LRS
-
-
-az storage share create --name idm3share --account-name mystorageaccountidm32023
+10. Create the storage account with the parameters & then create the file share
+  * az storage account create --resource-group myResourceGroup --name mystorageaccountidm32023 --location northeurope --sku Standard_LRS
+  * az storage share create --name idm3share --account-name mystorageaccountidm32023
 
 Login to https://portal.azure.com/
 Goto Storage Accounts 
@@ -68,15 +53,11 @@ upload app.war to idm3share-war folder
 
 
 
-### After each reboot or session
-
-az login
-
-az acr login --name tusidm3
-
-
-docker login azure
-docker-compose up --build
+11. After each reboot or session
+  * az login
+  * az acr login --name tusidm3
+  * docker login azure
+  * docker-compose up --build
 
 Goto Azure Portal and find public IP address of container
 
