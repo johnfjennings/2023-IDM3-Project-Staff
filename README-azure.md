@@ -11,7 +11,7 @@ Install Azure CLI - https://learn.microsoft.com/en-us/cli/azure/install-azure-cl
 
 ## Commands 
 
-# First you need to login to Azure and create an account if necessary
+### First you need to login to Azure and create an account if necessary
 az login 
 
 ### Next create a resource group to contain all resources for this project 
